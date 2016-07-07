@@ -1,0 +1,9 @@
+{
+  "apps" : [{
+    "name"        : "b2b-core",
+    "script"      : "./app/index.js",
+    "watch"       : true,
+    "exec_interpreter" : "babel-node",
+    "exec_mode" : "fork",
+  }]
+}
