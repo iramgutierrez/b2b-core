@@ -26,16 +26,6 @@ export default class BaseValidator
 
   _generateErrors(err)
   {
-      if(!err.hasOwnProperty('errors'))
-      {
-        if(err.hasOwnProperty('message'))
-        {
-          return err.message
-        }
-
-        return err
-      }
-
       err = err.errors
 
       var errors = {}

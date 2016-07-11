@@ -21,7 +21,10 @@ export default class BaseManager
 
         return this.validator
             .isValid()
-            .then(valid => this.entity.save())
+            .then(valid => {
+                this.entity.save()
+                return this.entity
+            })
             .catch(err => Q.reject(this.validator.errors))
     }
 
@@ -33,6 +36,7 @@ export default class BaseManager
     delete()
     {
       return this.entity.remove()
+                        .then(resource => Q.resolve(true))
     }
 
     setEntity(Entity)
