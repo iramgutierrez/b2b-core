@@ -1,6 +1,4 @@
 import Base from './Controllers/BaseController'
-import Repository from './Repositories/ProductRepository'
-import Manager from './Managers/ProductManager'
 
 class ProductController extends Base
 {
@@ -9,6 +7,7 @@ class ProductController extends Base
         super(Repository , Manager)
 
     }
+
 }
 
-export default new ProductController(Repository , Manager)
+export default ProductController

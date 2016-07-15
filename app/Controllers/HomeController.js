@@ -6,9 +6,9 @@ class HomeController
     
     index(req , res)
     {
-        res.send('Home')
+        res.send('B2B')
     }
 
 }
 
-export default new HomeController()
+export default HomeController

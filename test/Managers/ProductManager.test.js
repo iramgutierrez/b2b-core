@@ -5,6 +5,8 @@ import uuid from 'uuid'
 import mongoose from 'mongoose'
 
 import Manager from './Managers/ProductManager'
+
+Manager.setEntity(OtherEntity);
 import Entity from './Entities/ProductEntity'
 
 mongoose.Promise = global.Promise

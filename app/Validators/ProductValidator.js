@@ -1,5 +1,4 @@
 import Base from './Validators/BaseValidator'
-import Entity from './Entities/ProductEntity'
 
 class ProductValidator extends Base
 {
@@ -8,4 +7,4 @@ class ProductValidator extends Base
   }
 }
 
-export default new ProductValidator(Entity)
+export default ProductValidator

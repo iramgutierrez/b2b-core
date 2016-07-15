@@ -7,4 +7,5 @@ db.initialize()
 routes.initialize()
 io.initialize()
 
+
 server.listen(3000 , () => console.log('Server listen on port 3000') )

@@ -1,5 +1,7 @@
 import app from './app'
 import products from './Routes/products'
+import IoC from './IoC'
+var HomeController = IoC.create('HomeController')
 
 class Routes {
     constructor(app)
@@ -8,6 +10,7 @@ class Routes {
     }
     initialize()
     {
+        app.get('/', (req,res) => HomeController.index(req,res))
         app.use('/products', products)
     }
 }

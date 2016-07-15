@@ -27,4 +27,4 @@ class RouteResource
     }
 }
 
-export default new RouteResource()
+export default RouteResource
