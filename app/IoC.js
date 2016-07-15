@@ -92,19 +92,19 @@ class IoC
      * @returns {*}
      */
     create(classType) {
-        if (this.services.hasOwnProperty(classType)) {
-            var dependencies = this.services[classType].dependencies || [];
-            dependencies = dependencies.map((dependency) => this.create(dependency));
-
-            if (IoC.isClass(this.services[classType].class)) {
-                return Reflect.construct(this.services[classType].class, dependencies);
-            }
-
-            console.log(classType, 'It is not a class');
-            return this.services[classType].class;
+        if (!this.services.hasOwnProperty(classType)) {
+            return classType;
         }
 
-        return classType;
+        var dependencies = this.services[classType].dependencies || [];
+        dependencies = dependencies.map((dependency) => this.create(dependency));
+
+        if (IoC.isClass(this.services[classType].class)) {
+            return Reflect.construct(this.services[classType].class, dependencies);
+        }
+
+        console.log(classType, 'It is not a class');
+        return this.services[classType].class;
     }
 
     /**
@@ -114,18 +114,17 @@ class IoC
      * @returns {*}
      */
     createLayer(type , name) {
-        if(this.layers.hasOwnProperty(type))
-        {
-            var dependencies = this.layers[type].dependencies.map((dependency) => this.createLayer(dependency , name));
-
-            if (IoC.isClass(this.classes[type][name])) {
-                return Reflect.construct(this.classes[type][name], dependencies);
-            }
-
-            return this.classes[type][name];
+        if(!this.layers.hasOwnProperty(type)) {
+            return null;
         }
 
-        return null;
+        var dependencies = this.layers[type].dependencies.map((dependency) => this.createLayer(dependency , name));
+
+        if (IoC.isClass(this.classes[type][name])) {
+            return Reflect.construct(this.classes[type][name], dependencies);
+        }
+
+        return this.classes[type][name];
     }
 
     /**
