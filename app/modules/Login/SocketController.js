@@ -1,4 +1,4 @@
-import LoginManager from './Managers/LoginManager'
+import LoginManager from './modules/Login/LoginManager'
 
 class SocketController
 {

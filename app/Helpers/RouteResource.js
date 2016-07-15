@@ -1,4 +1,4 @@
-import BaseController from './Controllers/BaseController'
+import BaseController from './modules/Base/BaseController'
 import bodyParser from 'body-parser'
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })

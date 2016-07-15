@@ -1,4 +1,4 @@
-import Base from './Managers/BaseManager'
+import Base from './modules/Base/BaseManager'
 
 class ProductManager extends Base
 {

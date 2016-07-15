@@ -1,12 +1,6 @@
-import requireDir from 'require-dir'
-import controllers from './Controllers'
-import managers from './Managers'
-import repositories from './Repositories'
-import validators from './Validators'
-import entities from './Entities'
-
+import Product from './modules/Product'
 import RouteResource from './Helpers/RouteResource'
-import HomeController from './Controllers/HomeController'
+import HomeController from './modules/Home/HomeController'
 
 /**
  *
@@ -78,11 +72,7 @@ class IoC
      */
     get classes() {
         return {
-            'Controller': controllers,
-            'Manager': managers,
-            'Repository': repositories,
-            'Validator': validators,
-            'Entity': entities
+            'Product': Product
         }
     }
 
@@ -99,8 +89,6 @@ class IoC
             if (IoC.isClass(this.services[classType].class)) {
                 return Reflect.construct(this.services[classType].class, dependencies);
             }
-
-            console.log(classType, 'It is not a class');
             return this.services[classType].class;
         }
 
@@ -114,15 +102,16 @@ class IoC
      * @returns {*}
      */
     createLayer(type , name) {
-        if(this.layers.hasOwnProperty(type))
-        {
-            var dependencies = this.layers[type].dependencies.map((dependency) => this.createLayer(dependency , name));
+        if(this.layers.hasOwnProperty(type)) {
 
-            if (IoC.isClass(this.classes[type][name])) {
-                return Reflect.construct(this.classes[type][name], dependencies);
+            var dependencies = this.layers[type].dependencies.map((dependency) => this.createLayer(dependency , name));
+            var className = name+type;
+
+            if (IoC.isClass(this.classes[name][className])) {
+                return Reflect.construct(this.classes[name][className], dependencies);
             }
 
-            return this.classes[type][name];
+            return this.classes[name][className];
         }
 
         return null;

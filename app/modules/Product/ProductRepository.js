@@ -1,4 +1,4 @@
-import Base from './Repositories/BaseRepository'
+import Base from './modules/Base/BaseRepository'
 
 
 class ProductRepository extends Base

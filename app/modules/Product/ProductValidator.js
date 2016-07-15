@@ -1,4 +1,4 @@
-import Base from './Validators/BaseValidator'
+import Base from './modules/Base/BaseValidator'
 
 class ProductValidator extends Base
 {

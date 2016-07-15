@@ -1,6 +1,6 @@
 import socket from 'socket.io'
 import server from './server'
-import SocketController from './Controllers/SocketController'
+import SocketController from './modules/Login/SocketController'
 
 class IO {
     constructor(socket , server , SocketController)

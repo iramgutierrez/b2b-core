@@ -1,4 +1,4 @@
-import Base from './Controllers/BaseController'
+import Base from './modules/Base/BaseController'
 
 class ProductController extends Base
 {

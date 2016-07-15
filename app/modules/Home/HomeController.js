@@ -1,5 +1,3 @@
-import Q from 'q'
-
 class HomeController
 {
     constructor(){}

@@ -1,5 +1,3 @@
-import Q from 'q'
-
 export default class BaseController
 {
     constructor(Repository , Manager)
