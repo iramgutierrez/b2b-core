@@ -8,12 +8,21 @@ import entities from './Entities'
 import RouteResource from './Helpers/RouteResource'
 import HomeController from './Controllers/HomeController'
 
+/**
+ *
+ */
 class IoC
 {
+    /**
+     *
+     */
     constructor(){}
 
-    get layers()
-    {
+    /**
+     *
+     * @returns {{Controller: {dependencies: string[]}, Manager: {dependencies: string[]}, Validator: {dependencies: string[]}, Repository: {dependencies: string[]}, Entity: {dependencies: Array}}}
+     */
+    get layers() {
         return {
             Controller: {
                 dependencies: [
@@ -43,8 +52,11 @@ class IoC
         }
     }
 
-    get services()
-    {
+    /**
+     *
+     * @returns {{RouteResource: {class: RouteResource, dependencies: Array}, HomeController: {class: HomeController}}}
+     */
+    get services() {
         return {
             RouteResource: {
                 class: RouteResource,
@@ -60,8 +72,11 @@ class IoC
         }
     }
 
-    get classes()
-    {
+    /**
+     *
+     * @returns {{Controller: {Product}, Manager: {Product}, Repository: {Product}, Validator: {Product}, Entity: {Product}}}
+     */
+    get classes() {
         return {
             'Controller': controllers,
             'Manager': managers,
@@ -71,53 +86,56 @@ class IoC
         }
     }
 
-    create(classType)
-    {
-        if(this.services.hasOwnProperty(classType))
-        {
-            var dependencies = this.services[classType].dependencies || []
-            dependencies = dependencies.map((dependency) => this.create(dependency) )
+    /**
+     *
+     * @param classType
+     * @returns {*}
+     */
+    create(classType) {
+        if (this.services.hasOwnProperty(classType)) {
+            var dependencies = this.services[classType].dependencies || [];
+            dependencies = dependencies.map((dependency) => this.create(dependency));
 
-            if(IoC.isClass(this.services[classType].class))
-            {
-                return Reflect.construct(this.services[classType].class, dependencies)
+            if (IoC.isClass(this.services[classType].class)) {
+                return Reflect.construct(this.services[classType].class, dependencies);
             }
-            else
-            {
-                console.log(classType, 'no es clase')
-                return this.services[classType].class
-            }
+
+            console.log(classType, 'It is not a class');
+            return this.services[classType].class;
         }
-        else
-        {
-            return classType;
-        }
+
+        return classType;
     }
 
-    createLayer(type , name)
-    {
+    /**
+     *
+     * @param type
+     * @param name
+     * @returns {*}
+     */
+    createLayer(type , name) {
         if(this.layers.hasOwnProperty(type))
         {
-            var dependencies = this.layers[type].dependencies.map((dependency) => this.createLayer(dependency , name) )
+            var dependencies = this.layers[type].dependencies.map((dependency) => this.createLayer(dependency , name));
 
-            if(IoC.isClass(this.classes[type][name]))
-            {
-                return Reflect.construct(this.classes[type][name], dependencies)
+            if (IoC.isClass(this.classes[type][name])) {
+                return Reflect.construct(this.classes[type][name], dependencies);
             }
-            else
-            {
-                return this.classes[type][name]
-            }
+
+            return this.classes[type][name];
         }
-        else { return null; }
+
+        return null;
     }
 
-    static isClass(fn)
-    {
+    /**
+     *
+     * @param fn
+     * @returns {boolean}
+     */
+    static isClass(fn) {
         return typeof fn === 'function' && /^(?:class\s+|function\s+(?:_class|_default|[A-Z]))/.test(fn);
     }
 }
 
-
-
-export default new IoC()
+export default new IoC();
