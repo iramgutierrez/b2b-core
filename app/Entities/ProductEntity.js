@@ -1,9 +1,18 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import mongooseDouble from 'mongoose-double';
 import loadClass from 'mongoose-class-wrapper';
-import validate from 'mongoose-validator'
-import uniqueValidator from 'mongoose-unique-validator'
+import validate from 'mongoose-validator';
+import uniqueValidator from 'mongoose-unique-validator';
+
+mongooseDouble(mongoose);
+
+var SchemaTypes = mongoose.Schema.Types;
 
 let ProductSchema = new mongoose.Schema({
+    supplierId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     name : {
         type: String,
         required : true,
@@ -16,10 +25,34 @@ let ProductSchema = new mongoose.Schema({
             })
         ]
     },
-    price: {
-        type: Number,
-        required : true
-    }
+    prices: [
+        {
+            type: {
+                type: String,
+                required:true
+            },
+            value: {
+                type: SchemaTypes.Double,
+                required:true
+            }
+        }
+    ],
+    descriptions: {
+        short: String,
+        long: String
+    },
+    images: [
+        {
+            type: {
+                type: String,
+                required: true
+            },
+            value: {
+                type: String,
+                required: true
+            }
+        }
+    ]
 },
 {
   toObject: {
@@ -28,19 +61,19 @@ let ProductSchema = new mongoose.Schema({
   toJSON: {
     virtuals: true
   }
-})
+});
 
 
 class ProductEntity {
 
   getFillable()
   {
-    return ['name' , 'price']
+    return ['name' , 'price'];
   }
 
 }
 
-ProductSchema.plugin(uniqueValidator)
-ProductSchema.plugin(loadClass, ProductEntity)
+ProductSchema.plugin(uniqueValidator);
+ProductSchema.plugin(loadClass, ProductEntity);
 
-export default mongoose.model('Product', ProductSchema)
+export default mongoose.model('Product', ProductSchema);
