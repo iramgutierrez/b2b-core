@@ -1,7 +1,7 @@
 import BaseController from './Controllers/BaseController'
 import bodyParser from 'body-parser'
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 class RouteResource
 {

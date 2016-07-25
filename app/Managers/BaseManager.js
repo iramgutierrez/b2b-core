@@ -10,6 +10,7 @@ export default class BaseManager
     save(data)
     {
         var fillable = this.entity.getFillable()
+
         fillable.forEach(field => {
           if(data.hasOwnProperty(field))
           {

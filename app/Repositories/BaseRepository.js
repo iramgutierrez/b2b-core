@@ -8,11 +8,11 @@ export default class BaseRepository
     }
     create()
     {
-    return new this.entity
+        return new this.entity
     }
     all()
     {
-    return this.entity.find()
+        return this.entity.find()
     }
     findById(id)
     {

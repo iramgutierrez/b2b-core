@@ -22,7 +22,6 @@ export default class BaseController
         if(!req.body) return res.status(400).json(this.generateErrors('Missing data'))
 
         let data = req.body
-
         let resource = this.repository.create()
         this.manager.setEntity(resource)
 

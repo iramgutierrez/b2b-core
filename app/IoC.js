@@ -103,7 +103,6 @@ class IoC
             return Reflect.construct(this.services[classType].class, dependencies);
         }
 
-        console.log(classType, 'It is not a class');
         return this.services[classType].class;
     }
 
