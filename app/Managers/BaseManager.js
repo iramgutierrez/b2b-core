@@ -5,10 +5,14 @@ export default class BaseManager
     constructor(Validator, Entity){
       this.validator = Validator
       this.entity = Entity
+        this.data = {};
     }
 
     save(data)
     {
+
+        data = this.prepareData(data);
+
         var fillable = this.entity.getFillable()
 
         fillable.forEach(field => {
@@ -43,5 +47,10 @@ export default class BaseManager
     setEntity(Entity)
     {
         this.entity = Entity
+    }
+
+    prepareData(data)
+    {
+       return data;
     }
 }

@@ -17,7 +17,12 @@ class ProductEntity {
         'prices',
         'images',
         'details',
-        'descriptions'
+        'descriptions',
+        'shipping_details',
+        'stock',
+        'current_price',
+        'created_at',
+        'updated_at'
     ];
   }
 

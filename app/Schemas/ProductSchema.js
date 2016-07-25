@@ -66,7 +66,7 @@ let ProductSchema = new mongoose.Schema({
             }
         ],
         current_price: {
-            type: SchemaTypes.ObjectId
+            type: String
         },
         images: {
             full: {
